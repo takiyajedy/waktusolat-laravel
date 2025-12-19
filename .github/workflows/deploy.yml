@@ -2,7 +2,7 @@ name: Deploy to cPanel
 
 on:
   push:
-    branches: [ main ]  # atau 'master' kalau guna master branch
+    branches: [ master ]  # atau 'master' kalau guna master branch
   workflow_dispatch:  # boleh trigger manual dari GitHub
 
 jobs:
