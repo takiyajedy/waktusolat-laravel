@@ -97,7 +97,7 @@
         <!-- Zone Selection -->
         <div class="bg-white rounded-lg shadow-lg p-4 mb-4 fade-in">
             <button onclick="detectLocation()"
-                class="w-full mb-3 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold transition">
+                class="w-full mb-3 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg font-semibold transition">
                 📍 Guna Lokasi Saya
             </button>
 
