@@ -136,4 +136,24 @@ class WaktuSolatController extends Controller
 
         return response()->json($zones);
     }
+
+    public function fromGps(Request $request)
+{
+    $lat = $request->lat;
+    $long = $request->long;
+
+    if (!$lat || !$long) {
+        return response()->json(['error' => 'Lokasi tidak sah'], 400);
+    }
+
+    $response = Http::get(
+        "https://api.waktusolat.app/v2/solat/gps/$lat/$long"
+    );
+
+    if ($response->failed()) {
+        return response()->json(['error' => 'Gagal dapatkan waktu solat'], 500);
+    }
+
+    return $response->json();
+}
 }

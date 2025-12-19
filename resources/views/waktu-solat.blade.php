@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ms">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
-        
+
         * {
             font-family: 'Poppins', sans-serif;
         }
@@ -17,7 +18,7 @@
         .gradient-bg {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
-        
+
         .header-title {
             color: #764ba2 !important;
         }
@@ -28,7 +29,7 @@
 
         .prayer-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .active-prayer {
@@ -46,8 +47,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .fade-in {
@@ -55,8 +61,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .islamic-pattern {
@@ -64,6 +77,7 @@
         }
     </style>
 </head>
+
 <body class="bg-gray-50">
     <!-- Header -->
     <header class="gradient-bg islamic-pattern text-white py-6 shadow-lg">
@@ -72,7 +86,8 @@
                 <h1 class="header-title text-3xl md:text-4xl font-bold mb-2">
                     <i class="fas fa-mosque mr-2"></i>Waktu Solat Malaysia
                 </h1>
-                <p class="text-sm md:text-base opacity-90" style="color: #764ba2;">Waktu Solat Terkini Untuk Seluruh Malaysia</p>
+                <p class="text-sm md:text-base opacity-90" style="color: #764ba2;">Waktu Solat Terkini Untuk Seluruh
+                    Malaysia</p>
             </div>
         </div>
     </header>
@@ -81,12 +96,18 @@
     <main class="container mx-auto px-4 py-4">
         <!-- Zone Selection -->
         <div class="bg-white rounded-lg shadow-lg p-4 mb-4 fade-in">
+            <button onclick="detectLocation()"
+                class="w-full mb-3 bg-green-600 hover:bg-green-700 text-white py-2 rounded-lg font-semibold transition">
+                📍 Guna Lokasi Saya
+            </button>
+
             <div class="grid md:grid-cols-3 gap-3">
                 <div>
                     <label class="block text-gray-700 font-semibold mb-1 text-sm">
                         <i class="fas fa-map-marker-alt mr-1 text-purple-600"></i>Pilih Zon
                     </label>
-                    <select id="zoneSelect" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                    <select id="zoneSelect"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                         <option value="">Memuat zon...</option>
                     </select>
                 </div>
@@ -94,7 +115,8 @@
                     <label class="block text-gray-700 font-semibold mb-1 text-sm">
                         <i class="fas fa-calendar-alt mr-1 text-purple-600"></i>Bulan
                     </label>
-                    <select id="monthSelect" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                    <select id="monthSelect"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                         <option value="1">Januari</option>
                         <option value="2">Februari</option>
                         <option value="3">Mac</option>
@@ -113,12 +135,14 @@
                     <label class="block text-gray-700 font-semibold mb-1 text-sm">
                         <i class="fas fa-calendar mr-1 text-purple-600"></i>Tahun
                     </label>
-                    <select id="yearSelect" class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
+                    <select id="yearSelect"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600">
                         <!-- Will be populated by JavaScript -->
                     </select>
                 </div>
             </div>
-            <button id="searchBtn" class="w-full mt-3 gradient-bg text-white py-2 rounded-lg font-semibold text-sm hover:opacity-90 transition duration-300">
+            <button id="searchBtn"
+                class="w-full mt-3 gradient-bg text-white py-2 rounded-lg font-semibold text-sm hover:opacity-90 transition duration-300">
                 <i class="fas fa-search mr-2"></i>Cari Waktu Solat
             </button>
         </div>
@@ -170,7 +194,8 @@
         </div>
 
         <!-- Error Message -->
-        <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <div id="errorMessage" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative"
+            role="alert">
             <strong class="font-bold">Ralat!</strong>
             <span class="block sm:inline" id="errorText"></span>
         </div>
@@ -184,6 +209,66 @@
         </div>
     </footer>
 
+
+    <script>
+        const LAST_ZONE_KEY = 'waktu_solat_last_zone';
+
+        function detectLocation() {
+
+            if (!navigator.geolocation) {
+                alert("Browser tidak menyokong GPS");
+                return;
+            }
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+
+                    let lat = position.coords.latitude;
+                    let long = position.coords.longitude;
+
+                    fetch(`/waktu-solat/gps?lat=${lat}&long=${long}`)
+                        .then(res => res.json())
+                        .then(data => {
+
+                            if (data.error) {
+                                alert(data.error);
+                                return;
+                            }
+
+                            console.log("Zon dikesan:", data.zone);
+
+                            const zoneSelect = document.getElementById('zoneSelect');
+
+                            // ✅ SET ZON KE SELECT
+                            zoneSelect.value = data.zone;
+                            localStorage.setItem(LAST_ZONE_KEY, data.zone);
+
+                            if (zoneSelect.value === data.zone) {
+                                searchPrayerTimes();
+                            }
+
+                            // ❗ Jika zon belum load / tak jumpa
+                            if (zoneSelect.value !== data.zone) {
+                                for (let option of zoneSelect.options) {
+                                    if (option.value === data.zone) {
+                                        option.selected = true;
+                                        break;
+                                    }
+                                }
+                            }
+
+                            // ✅ AUTO CARI WAKTU SOLAT
+                            searchPrayerTimes();
+                        });
+                },
+                function() {
+                    alert("Kebenaran lokasi ditolak");
+                }
+            );
+        }
+    </script>
+
+
     <script>
         // Global variables
         let zonesData = [];
@@ -194,21 +279,41 @@
             loadZones();
             populateYears();
             setCurrentDate();
-            
+
+            document.getElementById('zoneSelect').addEventListener('change', function() {
+                if (this.value) {
+                    localStorage.setItem(LAST_ZONE_KEY, this.value);
+                    searchPrayerTimes();
+                }
+            });
+
+
+
             // Event listeners
             document.getElementById('searchBtn').addEventListener('click', searchPrayerTimes);
-            document.getElementById('zoneSelect').addEventListener('change', searchPrayerTimes);
+            // document.getElementById('zoneSelect').addEventListener('change', searchPrayerTimes);
         });
+
+        // Load last saved zone
+        const lastZone = localStorage.getItem(LAST_ZONE_KEY);
+
+        if (lastZone) {
+            zoneSelect.value = lastZone;
+
+            if (zoneSelect.value === lastZone) {
+                searchPrayerTimes();
+            }
+        }
 
         // Load zones
         async function loadZones() {
             try {
                 const response = await fetch('/api/zones');
                 zonesData = await response.json();
-                
+
                 const zoneSelect = document.getElementById('zoneSelect');
                 zoneSelect.innerHTML = '<option value="">Pilih Zon...</option>';
-                
+
                 zonesData.forEach(zone => {
                     const option = document.createElement('option');
                     option.value = zone.code;
@@ -216,19 +321,27 @@
                     zoneSelect.appendChild(option);
                 });
 
-                // Set default to KDH01
-                zoneSelect.value = 'KDH01';
-                searchPrayerTimes();
+                // ✅ APPLY LAST ZONE DARI localStorage
+                const lastZone = localStorage.getItem(LAST_ZONE_KEY);
+                if (lastZone) {
+                    zoneSelect.value = lastZone;
+
+                    if (zoneSelect.value === lastZone) {
+                        searchPrayerTimes();
+                    }
+                }
+
             } catch (error) {
                 showError('Gagal memuat senarai zon');
             }
         }
 
+
         // Populate years
         function populateYears() {
             const yearSelect = document.getElementById('yearSelect');
             const currentYear = new Date().getFullYear();
-            
+
             for (let year = currentYear - 1; year <= currentYear + 1; year++) {
                 const option = document.createElement('option');
                 option.value = year;
@@ -295,14 +408,41 @@
             if (!todayPrayer) return;
 
             const container = document.getElementById('todayPrayerTimes');
-            const prayerNames = [
-                { key: 'imsak', name: 'Imsak', icon: 'fa-cloud-moon' },
-                { key: 'fajr', name: 'Subuh', icon: 'fa-moon' },
-                { key: 'syuruk', name: 'Syuruk', icon: 'fa-sun' },
-                { key: 'dhuhr', name: 'Zohor', icon: 'fa-sun' },
-                { key: 'asr', name: 'Asar', icon: 'fa-cloud-sun' },
-                { key: 'maghrib', name: 'Maghrib', icon: 'fa-cloud-moon' },
-                { key: 'isha', name: 'Isyak', icon: 'fa-moon' }
+            const prayerNames = [{
+                    key: 'imsak',
+                    name: 'Imsak',
+                    icon: 'fa-cloud-moon'
+                },
+                {
+                    key: 'fajr',
+                    name: 'Subuh',
+                    icon: 'fa-moon'
+                },
+                {
+                    key: 'syuruk',
+                    name: 'Syuruk',
+                    icon: 'fa-sun'
+                },
+                {
+                    key: 'dhuhr',
+                    name: 'Zohor',
+                    icon: 'fa-sun'
+                },
+                {
+                    key: 'asr',
+                    name: 'Asar',
+                    icon: 'fa-cloud-sun'
+                },
+                {
+                    key: 'maghrib',
+                    name: 'Maghrib',
+                    icon: 'fa-cloud-moon'
+                },
+                {
+                    key: 'isha',
+                    name: 'Isyak',
+                    icon: 'fa-moon'
+                }
             ];
 
             container.innerHTML = prayerNames.map(prayer => `
@@ -324,7 +464,7 @@
             tbody.innerHTML = prayers.map(prayer => {
                 const isToday = prayer.day === today;
                 const rowClass = isToday ? 'bg-purple-50 font-semibold' : 'hover:bg-gray-50';
-                
+
                 return `
                     <tr class="${rowClass}">
                         <td class="px-2 py-1 border-b text-left">
@@ -348,7 +488,10 @@
         function formatTime(timestamp) {
             if (!timestamp) return '-';
             const date = new Date(timestamp * 1000);
-            return date.toLocaleTimeString('ms-MY', { hour: '2-digit', minute: '2-digit' });
+            return date.toLocaleTimeString('ms-MY', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
         }
 
         function getMonthName(month) {
@@ -377,4 +520,5 @@
         }
     </script>
 </body>
+
 </html>
